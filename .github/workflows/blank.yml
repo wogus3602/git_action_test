@@ -14,10 +14,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build
-      run: 
+      run: |
       cd GitAction
       swift build -v
     - name: Run tests
-      run: 
+      run: |
       cd GitAction
       swift test -v
