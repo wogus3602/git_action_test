@@ -11,7 +11,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Run Unit and UI Tests
 #      run: xcrun instruments -s devices
-      run: xcodebuild clean test -project GitAction.xcodeproj -scheme GitAction -destination "platform=iOS Simulator,name=iPhone 11"
+      run: xcodebuild test -project GitAction.xcodeproj -scheme GitAction -destination "platform=iOS Simulator,name=iPhone 11"
 
 
 #iPhone 11 Pro (13.7) [3EC40FE8-06E6-46BD-AC6F-F1FE1A8C20CD] (Simulator)
