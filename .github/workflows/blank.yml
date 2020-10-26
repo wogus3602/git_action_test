@@ -14,10 +14,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build
-      run: 
-      cd GitAction
-      swift build -v
+      run: cd GitAction & swift build -v
     - name: Run tests
-      run: 
-      cd GitAction
-      swift test -v
+      run: cd GitAction & swift test -v
