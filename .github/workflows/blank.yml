@@ -8,7 +8,7 @@ jobs:
     runs-on: macOS-latest
 
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v2
     - name: Run Unit and UI Tests
 #      run: xcrun instruments -s devices
       run: xcodebuild clean test -project GitAction.xcodeproj -scheme GitAction -destination "platform=iOS Simulator,name=iPhone 11"
