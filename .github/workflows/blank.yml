@@ -1,10 +1,6 @@
 name: Swift
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on: [push]
 
 jobs:
   build:
@@ -13,7 +9,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - name: Force Xcode 11
+      run: sudo xcode-select -switch /Applications/Xcode_11.3.app
     - name: Run tests
-      run: xcodebuild -project 'GitAction/GitAction.xcodeproj' -scheme 'GitAction' -destination 'platform=iOS Simulator,name=iPhone 11 Pro Max' test
+      run: xcodebuild clean test -project "GitAction/GitAction.xcodeproj" -scheme "GitAction" -destination "platform=iOS Simulator,name=iPhone 11 Pro Max,OS=latest"
     - name: Build App
-      run: xcodebuild -project 'GitAction/GitAction.xcodeproj' -scheme 'GitAction' -destination 'generic/platform=iOS' -configuration Release build CODE_SIGNING_ALLOWED=NO
+      run: xcodebuild -project "GitAction/GitAction.xcodeproj" -scheme "GitAction" -destination "generic/platform=iOS" -configuration Release build CODE_SIGNING_ALLOWED=NO
