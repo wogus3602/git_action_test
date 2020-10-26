@@ -14,4 +14,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build
-      run: xcodebuild test -project GitAction/GitAction.xcodeproj -scheme GitAction -destination 'platform=iOS,name=Development iPod touch'
+      run: xcodebuild test -project GitAction/GitAction.xcodeproj -scheme GitAction -destination "platform=iOS,name=Development iPhone 6"
