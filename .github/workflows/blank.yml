@@ -10,4 +10,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Run Unit and UI Tests
-      run: /usr/bin/xcodebuild test -project "GitAction/$XC_PROJECT" -scheme "GitAction/$XC_SCHEME" -destination "platform=iOS Simulator,name=iPhone 11"
+      run: xcrun instruments -s devices
