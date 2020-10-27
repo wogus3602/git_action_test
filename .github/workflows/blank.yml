@@ -5,16 +5,16 @@ on:
 jobs: 
       build:
         runs-on: [macos-latest] 
-        defaults:
-          run:
-            working-directory: ./GitAction
         env: 
           XC_VERSION: ${{ '12.1.0' }}
           XC_PROJECT: ${{ 'GitAction/GitAction.xcodeproj' }}
           XC_SCHEME: ${{ 'GitAction' }}
+          XC_FOLDERL: ${{ './GitAction' }}
         steps: 
         - name: Install Dependencies
-          run: pod install --repo-update
+          run: |
+             cd $XC_FOLDERL
+             pod install 
           shell: bash
         - uses: actions/checkout@v2
         - name: Run Unit and UI Tests
