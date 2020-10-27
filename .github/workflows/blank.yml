@@ -12,7 +12,7 @@ jobs:
         steps: 
         - name: Install Dependencies
           run: |
-             cd ${{ github.workspace }}
+             cd ${{ github.workspace }}/GitAction
              pod install 
         - uses: actions/checkout@v2
         - name: Run Unit and UI Tests
