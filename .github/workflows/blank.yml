@@ -10,6 +10,9 @@ jobs:
           XC_PROJECT: ${{ 'GitAction/GitAction.xcodeproj' }}
           XC_SCHEME: ${{ 'GitAction' }}
         steps: 
+        - name: Install Dependencies2
+          run: |
+             ls ${{ github.workspace }} -la
         - name: Install Dependencies
           run: |
              cd ${{ github.workspace }}/GitAction
