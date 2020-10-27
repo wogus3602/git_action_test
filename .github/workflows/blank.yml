@@ -13,12 +13,9 @@ jobs:
         - name: Select latest Xcode 
           run: "sudo xcode-select -s /Applications/Xcode_$XC_VERSION.app" 
         - uses: actions/checkout@v2
-        - name: Install Dependencies2
-          run: |
-             ls -la ${{ github.workspace }}
         - name: Install Dependencies
           run: |
-             cd ${{ github.workspace }}/GitAction
+             cd ./GitAction
              pod install 
         - name: Run Unit and UI Tests
           working-directory: ./iOS/IssueTracker
