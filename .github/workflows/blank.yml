@@ -13,8 +13,9 @@ jobs:
         - name: Select latest Xcode 
           run: "sudo xcode-select -s /Applications/Xcode_$XC_VERSION.app" 
         - name: Install Dependencies
-          working-directory: ./GitAction
-          run: pod install --repo-update
+          run: |
+            cd GitAction
+            pod install --repo-update
           shell: bash
         - uses: actions/checkout@v2
         - name: Run Unit and UI Tests
