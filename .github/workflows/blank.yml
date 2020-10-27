@@ -12,7 +12,7 @@ jobs:
         steps: 
         - name: Build site assets
           working-directory: ${{ github.workspace }}
-          run: ls -la ../
+          run: ls -la ../git_action_test/
         - name: Select latest Xcode 
           run: "sudo xcode-select -s /Applications/Xcode_$XC_VERSION.app" 
         - name: Install Dependencies
