@@ -9,11 +9,10 @@ jobs:
           XC_VERSION: ${{ '12.1.0' }}
           XC_PROJECT: ${{ 'GitAction/GitAction.xcodeproj' }}
           XC_SCHEME: ${{ 'GitAction' }}
-          XC_FOLDERL: ${{ './GitAction' }}
         steps: 
         - name: Install Dependencies
           run: |
-             cd $XC_FOLDERL
+             cd ${{ github.workspace }}
              pod install 
         - uses: actions/checkout@v2
         - name: Run Unit and UI Tests
