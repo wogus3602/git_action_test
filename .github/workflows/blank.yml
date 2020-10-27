@@ -15,7 +15,6 @@ jobs:
           run: |
              cd $XC_FOLDERL
              pod install 
-          shell: bash
         - uses: actions/checkout@v2
         - name: Run Unit and UI Tests
           working-directory: ./iOS/IssueTracker
