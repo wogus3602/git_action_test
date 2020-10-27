@@ -13,8 +13,6 @@ jobs:
           XC_PROJECT: ${{ 'GitAction/GitAction.xcodeproj' }}
           XC_SCHEME: ${{ 'GitAction' }}
         steps: 
-        - name: Select latest Xcode 
-          run: "sudo xcode-select -s /Applications/Xcode_$XC_VERSION.app" 
         - name: Install Dependencies
           run: pod install --repo-update
           shell: bash
