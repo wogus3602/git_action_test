@@ -26,6 +26,7 @@ jobs:
     
       - name: Write a comment when unit test fails
         uses: actions/github-script@v3
+        if: failure()
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -39,4 +40,4 @@ jobs:
                 repo: context.repo.repo,
                 body: '👋 Thanks for reporting!'
               })
-          if: failure()    
+              
