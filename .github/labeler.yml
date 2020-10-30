@@ -1,8 +1,5 @@
-repo:
-  - ./*
-
 bug:
-  - all: [./README.md]
+  - ./*.md
   
 documentation :
-  - all: [./GitAction/*]
+  - ./GitAction/*
