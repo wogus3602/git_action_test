@@ -26,3 +26,13 @@ class GitActionTests: XCTestCase {
     }
 
 }
+
+//
+//with:
+//  github-token: ***
+//  script: await github.pulls.createReview({
+//  ...context.repo,
+//  context.payload.pull_request.number,
+//  body: “👋 테스트코드가 실패했습니다.“,
+//  event: “REQUEST_CHANGES”
+//})
