@@ -3,3 +3,6 @@ bug:
   
 documentation :
   - ./GitAction/*
+
+repo:
+  - '.github/**'
