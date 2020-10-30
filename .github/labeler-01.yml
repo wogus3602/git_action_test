@@ -1,5 +1,5 @@
 bug:
-  - any: ['./*', './src/**']
+  - any: ['./*.md', './GitAction/**']
   
 documentation :
-  - any: ['.github/workflows/**']
+  - any: ['.github/GitAction/**']
