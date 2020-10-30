@@ -7,14 +7,14 @@ jobs:
         runs-on: [macos-latest]
         env: 
           XC_VERSION: ${{ '12.1.0' }}
-          XC_PROJECT: ${{ 'GitAction/GitAction.xcodeproj' }}
+          XC_PROJECT: ${{ 'GitAction/GitAction.xcworkspace' }}
           XC_SCHEME: ${{ 'GitAction' }}
 
         steps:  
         - uses: actions/checkout@v2
           
         - name: Install Dependencies
-          working-directory: ./iOS/IssueTracker
+          working-directory: ./GitAction
           run: pod install --repo-update
           shell: bash
           
