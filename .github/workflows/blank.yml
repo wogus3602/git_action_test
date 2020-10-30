@@ -1,18 +1,24 @@
 name: Swift
-on: 
+on:
       push:
-        branches: [main] 
+        branches: [main]
 jobs: 
       build:
-        runs-on: [macos-latest] 
+        runs-on: [macos-latest]
         env: 
           XC_VERSION: ${{ '12.1.0' }}
           XC_PROJECT: ${{ 'GitAction/GitAction.xcodeproj' }}
-          XC_SCHEME: ${{ 'GitAction' }} 
+          XC_SCHEME: ${{ 'GitAction' }}
         steps: 
         - name: Select latest Xcode 
           run: "sudo xcode-select -s /Applications/Xcode_$XC_VERSION.app" 
         - uses: actions/checkout@v2 
-        - name: Run Unit and UI Tests 
-          run: /usr/bin/xcodebuild test -project "$XC_PROJECT" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11'
-
+        - name: podfile
+          run: ls -la ./GitAction
+        - name: Install Dependencies
+          run: |
+             cd ./GitAction
+             pod install 
+        - name: Run Unit and UI Tests
+          working-directory: ./iOS/IssueTracker
+          run: /usr/bin/xcodebuild test -project “$XC_PROJECT” -scheme “$XC_SCHEME” -destination ‘platform=iOS Simulator,name=iPhone 11’ 
