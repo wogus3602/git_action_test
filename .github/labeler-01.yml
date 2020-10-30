@@ -1,11 +1,2 @@
-documentation :
-  - 'GitAction/**'
-
 enhancement :
-  - 'GitAction/*'
-
-invalid :
-  - './GitAction/**'
-
-bug :
-  - './GitAction/*'
+  - '*'
