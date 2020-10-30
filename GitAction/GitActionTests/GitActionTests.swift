@@ -18,6 +18,8 @@ class GitActionTests: XCTestCase {
 
     func testExample() throws {
         XCTAssertTrue(true)
+        XCTAssertTrue(false)
+
     }
 
     func testPerformanceExample() throws {
@@ -27,12 +29,3 @@ class GitActionTests: XCTestCase {
 
 }
 
-//
-//with:
-//  github-token: ***
-//  script: await github.pulls.createReview({
-//  ...context.repo,adasd
-//  context.payload.pull_request.number,
-//  body: “👋 테스트코드가 실패했습니다.“,
-//  event: “REQUEST_CHANGES”
-//})
