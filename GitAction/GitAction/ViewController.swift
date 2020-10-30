@@ -11,9 +11,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional seasdastup after loading the view.
+        // Do any additional seasdastup after loading the view.aaa
     }
-
-
 }
-
