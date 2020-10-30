@@ -1,5 +1,11 @@
 documentation :
-  - all: ['GitAction/*']
+  - '/GitAction/**'
+
+enhancement :
+  - './GitAction/**'
 
 invalid :
-  - 'GitAction/*'
+  - '/GitAction/*'
+
+bug :
+  - './GitAction/*'
