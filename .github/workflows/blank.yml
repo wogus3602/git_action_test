@@ -9,6 +9,7 @@ jobs:
           XC_VERSION: ${{ '12.1.0' }}
           XC_PROJECT: ${{ 'GitAction/GitAction.xcworkspace' }}
           XC_SCHEME: ${{ 'GitAction' }}
+          PR_NUMBER: ${{ 'github.event.number' }}
 
         steps:  
         - uses: actions/checkout@v2
@@ -18,8 +19,8 @@ jobs:
           with:
                 github-token: ${{secrets.GITHUB_TOKEN}}
                 script: |
-                    const get = await github.pulls.get()
-                    const list = await github.pulls.list()
-
-                    console.log(get)
-                    console.log(list)
+                    const a = await github.pulls.get({
+                          repo: git_action_test,
+                          owner: wogus3602,
+                        })
+                    console.log(a)
