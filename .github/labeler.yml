@@ -1,0 +1,5 @@
+bug:
+- all: [./README.md]
+  
+documentation :
+- all: [./GitAction/*]
