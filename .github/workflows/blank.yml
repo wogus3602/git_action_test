@@ -25,12 +25,12 @@ jobs:
           run: /usr/bin/xcodebuild test -workspace "$XC_PROJECT" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11'
 
         - name: pr close if test failed
-          uses: actions/github-script@0.2.0
+          uses: actions/github-script@v3
           with:
                 github-token: ${{secrets.GITHUB_TOKEN}}
                 script: |
                   const ref = "${{github.ref}}"
-                  const pull_number = github.context.payload.pull_request.number
+                  const pull_number = github.context.pull_request.number
 
                   await github.pulls.createReview({
                     ...context.repo,
