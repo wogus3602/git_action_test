@@ -29,11 +29,11 @@ jobs:
           with:
             github-token: ${{secrets.GITHUB_TOKEN}}
             script: |
-              await github.issues.createComment({
-                    issue_number: context.payload.pull_request.number,
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    body: '👋 테스트코드가 실패했습니다.'
+              await github.pulls.createReview({
+                ...context.repo,
+                context.payload.pull_request.number,
+                body: “👋 테스트코드가 실패했습니다.“,
+                event: “REQUEST_CHANGES”
               })
               
           if: ${{ failure() }}
