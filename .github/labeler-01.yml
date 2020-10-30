@@ -1,2 +1,2 @@
 documentation :
-  - any: ['*.md', 'GitAction/**']
+  - any: 'GitAction/**'
