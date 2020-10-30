@@ -18,5 +18,8 @@ jobs:
           with:
                 github-token: ${{secrets.GITHUB_TOKEN}}
                 script: |
-                    console.log(github.pulls.get())
-                    console.log(github.pulls.list())
+                    const get = await github.pulls.get()
+                    const list = await github.pulls.list()
+
+                    console.log(get)
+                    console.log(list)
