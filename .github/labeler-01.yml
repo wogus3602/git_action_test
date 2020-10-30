@@ -1,5 +1,5 @@
 documentation :
-  - all: ['GitAction/**']
+  - all: ['GitAction/*']
 
 invalid :
-  - 'GitAction/**'
+  - 'GitAction/*'
