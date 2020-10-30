@@ -1,39 +1,35 @@
 name: Swift
 on:
-      push:
-        branches: [main]
-jobs: 
-      build:
-        runs-on: [macos-latest]
-        env: 
-          XC_VERSION: ${{ '12.1.0' }}
-          XC_PROJECT: ${{ 'GitAction/GitAction.xcworkspace' }}
-          XC_SCHEME: ${{ 'GitAction' }}
-
-        steps:  
-        - uses: actions/checkout@v2
-          
-        - name: Install Dependencies
-          working-directory: ./GitAction
-          run: pod install --repo-update
-          shell: bash
-          
-        - name: Select latest Xcode 
-          run: "sudo xcode-select -s /Applications/Xcode_$XC_VERSION.app"  
-          
-        - name: Run Unit and UI Tests
-          run: /usr/bin/xcodebuild test -workspace "$XC_PROJECT" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11'
-
-        - name: pr close if test failed
-          uses: actions/github-script@0.2.0
-          with:
-            github-token: ${{secrets.GITHUB_TOKEN}}
-            script: |
-              await github.issues.createComment({
-                    issue_number: context.issue.number,
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    body: '👋 테스트코드가 실패했습니다.'
+      pull_request:
+            branches: dd
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Dependencies
+        working-directory: ./GitAction
+        run: pod install --repo-update
+        shell: bash
+        
+      - name: Select latest Xcode
+        run: “sudo xcode-select -s /Applications/Xcode_$XC_VERSION.app”
+        
+      - name: Run Unit and UI Tests
+        run: /usr/bin/xcodebuild test -workspace “$XC_PROJECT” -scheme “$XC_SCHEME” -destination ‘platform=iOS Simulator,name=iPhone 11’
+        
+      - name: Write a comment when unit test fails
+      - uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+              const ref = "${{github.ref}}"
+              const pull_number = Number(ref.split("/")[2])
+              
+              await await github.issues.createComment({
+                issue_number: pull_number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: '👋 Thanks for reporting!'
               })
               
-        if: failure()
+          if: ${{ failure() }}    
