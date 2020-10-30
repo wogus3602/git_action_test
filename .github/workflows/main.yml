@@ -5,7 +5,7 @@ on:
     branches:
       - main # 해당 기능을 사용하고 싶은 브랜치를 정의합니다
 jobs:
-  Run Actions:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Automatically Merge PR
