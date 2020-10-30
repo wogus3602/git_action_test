@@ -30,7 +30,7 @@ jobs:
                 github-token: ${{secrets.GITHUB_TOKEN}}
                 script: |
                   const ref = "${{github.ref}}"
-                  const pull_number = context.payload.pull_request.number
+                  const pull_number = github.context.payload.pull_request.number
 
                   await github.pulls.createReview({
                     ...context.repo,
