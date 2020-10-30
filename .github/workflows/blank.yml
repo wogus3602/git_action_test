@@ -23,5 +23,3 @@ jobs:
           
         - name: Run Unit and UI Tests
           run: /usr/bin/xcodebuild test -workspace "$XC_PROJECT" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11'
- 
-
