@@ -27,13 +27,16 @@ jobs:
         - name: pr close if test failed
           uses: actions/github-script@0.2.0
           with:
-            github-token: ${{secrets.GITHUB_TOKEN}}
-            script: |
-              await github.pulls.createReview({
-                ...context.repo,
-                pull_number: context.payload.pull_request.number,
-                body: “👋 테스트코드가 실패했습니다.“,
-                event: “REQUEST_CHANGES”
-              })
-              
+                github-token: ${{secrets.GITHUB_TOKEN}}
+                script: |
+                  const ref = "${{github.ref}}"
+                  const pull_number = Number(ref.split("/")[2])
+
+                  await github.pulls.createReview({
+                    ...context.repo,
+                    pull_number,
+                    body: "👋 테스트코드가 실패했습니다.",
+                    event: "REQUEST_CHANGES"
+                  })
+
           if: ${{ failure() }}
