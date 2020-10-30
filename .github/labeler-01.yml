@@ -1,11 +1,11 @@
 documentation :
-  - '/GitAction/**'
+  - '/GitAction/'
 
 enhancement :
-  - './GitAction/**'
+  - './GitAction/'
 
 invalid :
-  - '/GitAction/*'
+  - '/GitAction'
 
 bug :
-  - './GitAction/*'
+  - './GitAction'
