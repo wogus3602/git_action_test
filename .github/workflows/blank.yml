@@ -1,11 +1,23 @@
 name: Swift
 on:
       pull_request:
-            branches: main
+            branches: dd
 jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
+      - name: Install Dependencies
+        working-directory: ./GitAction
+        run: pod install --repo-update
+        shell: bash
+        
+      - name: Select latest Xcode
+        run: “sudo xcode-select -s /Applications/Xcode_$XC_VERSION.app”
+        
+      - name: Run Unit and UI Tests
+        run: /usr/bin/xcodebuild test -workspace “$XC_PROJECT” -scheme “$XC_SCHEME” -destination ‘platform=iOS Simulator,name=iPhone 11’
+        
+      - name: Write a comment when unit test fails
       - uses: actions/github-script@v3
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
@@ -13,10 +25,11 @@ jobs:
               const ref = "${{github.ref}}"
               const pull_number = Number(ref.split("/")[2])
               
-              console.log(context)
               await await github.issues.createComment({
                 issue_number: pull_number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 body: '👋 Thanks for reporting!'
               })
+              
+          if: ${{ failure() }}    
