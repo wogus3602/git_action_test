@@ -1,5 +1,2 @@
-bug:
-  - any: ['*.md', 'GitAction/**']
-  
 documentation :
-  - any: ['.github/GitAction/**']
+  - any: ['*.md', 'GitAction/**']
