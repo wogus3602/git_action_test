@@ -1,11 +1,11 @@
 name: "Pull Request Labeler Test1"
-on: [pull_request]
+on: pull_request
 
 jobs:
   triage:
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/labeler@main
+    - uses: actions/labeler@@2.2.0
       with:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
         configuration-path: .github/labeler.yml
