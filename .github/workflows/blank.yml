@@ -7,14 +7,14 @@ jobs:
         runs-on: [macos-latest]
         env: 
           XC_VERSION: ${{ '12.1.0' }}
-          XC_PROJECT: ${{ 'GitAction/GitAction.xcodeproj' }}
+          XC_PROJECT: ${{ 'GitAction/GitAction.xcworkspace' }}
           XC_SCHEME: ${{ 'GitAction' }}
 
         steps:  
         - uses: actions/checkout@v2
           
         - name: Install Dependencies
-          working-directory: ./iOS/IssueTracker
+          working-directory: ./GitAction
           run: pod install --repo-update
           shell: bash
           
@@ -24,22 +24,16 @@ jobs:
         - name: Run Unit and UI Tests
           run: /usr/bin/xcodebuild test -workspace "$XC_PROJECT" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11'
 
-        - name: If Fail
+        - name: pr close if test failed
           uses: actions/github-script@0.2.0
           with:
-            github-token: ${{github.token}}
+            github-token: ${{secrets.GITHUB_TOKEN}}
             script: |
-              const ref = "${{github.ref}}"
-              const pull_number = Number(ref.split("/")[2])
-              await github.pulls.createReview({
-                ...context.repo,
-                pull_number,
-                body:"테스트를 통과하지 못했습니다.",
-                event: "REQUEST_CHANGES"
+              await github.issues.createComment({
+                    issue_number: context.issue.number,
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    body: '👋 테스트코드가 실패했습니다.'
               })
-              await github.pulls.update({
-                ...context.repo,
-                pull_number,
-                state: "closed"
-              })
-          if: failure()
+              
+        if: failure()
