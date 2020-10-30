@@ -31,7 +31,8 @@ jobs:
                 script: |
                   const ref = "${{github.ref}}"
                   const pull_number = github.context.pull_request.number
-
+                  console.log(github.context.pull_request)      
+                  
                   await github.pulls.createReview({
                     ...context.repo,
                     pull_number,
