@@ -1,8 +1,10 @@
 name: "Pull Request Labeler"
 on:   
+  push:
+    branches: [dd, main]
   pull_request:
     branches: [ dd, main ]
-
+  
 jobs:
   triage:
     runs-on: ubuntu-latest
