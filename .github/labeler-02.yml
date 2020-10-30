@@ -4,3 +4,6 @@ repo:
 
 bug:
   - '.github/**'
+
+documentation:
+  - './*.md'
