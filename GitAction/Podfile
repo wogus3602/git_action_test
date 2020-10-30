@@ -1,4 +1,4 @@
-# sdaddasdasUncomment the next line to define a global platform for your project
+# dasdsdaddasdasUncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
 target 'GitAction' do
