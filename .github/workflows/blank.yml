@@ -3,12 +3,19 @@ on:
       pull_request:
             branches: main
 jobs:
-  comment:
+  build-and-UnitTest:
     runs-on: macos-latest
+          
+    env:
+          XC_VERSION: ${{ '12.1.0' }}
+          XC_PROJECT: ${{ 'GitAction/GitAction.xcworkspace' }}
+          XC_SCHEME: ${{ 'GitAction' }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     steps:
       - uses: actions/github-script@v3
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
+          github-token: $GITHUB_TOKEN
           script: |
               const ref = "${{github.ref}}"
               const pull_number = Number(ref.split("/")[2])
