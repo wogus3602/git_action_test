@@ -10,7 +10,7 @@ jobs:
           XC_VERSION: ${{ '12.1.0' }}
           XC_PROJECT: ${{ 'GitAction/GitAction.xcworkspace' }}
           XC_SCHEME: ${{ 'GitAction' }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ 'secrets.GITHUB_TOKEN' }}
 
     steps:
       - uses: actions/github-script@v3
