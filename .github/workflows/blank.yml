@@ -10,12 +10,11 @@ jobs:
           XC_VERSION: ${{ '12.1.0' }}
           XC_PROJECT: ${{ 'GitAction/GitAction.xcworkspace' }}
           XC_SCHEME: ${{ 'GitAction' }}
-          GITHUB_TOKEN: ${{ 'secrets.GITHUB_TOKEN' }}
 
     steps:
       - uses: actions/github-script@v3
         with:
-          github-token: $GITHUB_TOKEN
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
               const ref = "${{github.ref}}"
               const pull_number = Number(ref.split("/")[2])
@@ -27,3 +26,4 @@ jobs:
                 repo: context.repo.repo,
                 body: '👋 Thanks for reporting!'
               })
+          if: ${{ true() }}    
