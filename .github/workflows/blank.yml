@@ -12,18 +12,7 @@ jobs:
 
         steps:  
         - uses: actions/checkout@v2
-          
-        - name: Install Dependencies
-          working-directory: ./GitAction
-          run: pod install --repo-update
-          shell: bash
-          
-        - name: Select latest Xcode 
-          run: "sudo xcode-select -s /Applications/Xcode_$XC_VERSION.app"  
-          
-        - name: Run Unit and UI Tests
-          run: /usr/bin/xcodebuild test -workspace "$XC_PROJECT" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11'
-
+    
         - name: pr close if test failed
           uses: actions/github-script@v3
           with:
@@ -39,5 +28,3 @@ jobs:
                     body: "👋 테스트코드가 실패했습니다.",
                     event: "REQUEST_CHANGES"
                   })
-
-          if: ${{ failure() }}
