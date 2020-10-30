@@ -2,21 +2,17 @@ name: Swift
 on:
       push:
         branches: [main]
-jobs: 
-      build:
-        runs-on: [macos-latest]
-        env: 
-          XC_VERSION: ${{ '12.1.0' }}
-          XC_PROJECT: ${{ 'GitAction/GitAction.xcworkspace' }}
-          XC_SCHEME: ${{ 'GitAction' }}
-          PR_NUMBER: ${{ 'github.event.number' }}
-
-        steps:  
-            - name: 'Comment PR'
-              uses: actions/github-script@0.3.0
-              if: github.event_name == 'pull_request'
-              with:
-                github-token: ${{ secrets.GITHUB_TOKEN }}
-                script: |
-                  const { issue: { number: issue_number }, repo: { owner, repo }  } = context;
-                  github.issues.createComment({ issue_number, owner, repo, body: 'Hello world ! 👋' });
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '👋 Thanks for reporting!'
+            })
