@@ -19,7 +19,6 @@ class GitActionTests: XCTestCase {
     func testExample() throws {
         XCTAssertTrue(true)
         XCTAssertTrue(false)
-
     }
 
     func testPerformanceExample() throws {
