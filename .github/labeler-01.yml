@@ -1,0 +1,5 @@
+bug:
+  - any: ['./*', './src/**']
+  
+documentation :
+  - any: ['.github/workflows/**']
