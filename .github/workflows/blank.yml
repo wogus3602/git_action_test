@@ -11,7 +11,7 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
               await await github.issues.createComment({
-                issue_number: 32,
+                issue_number: 33,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 body: '👋 Thanks for reporting!'
