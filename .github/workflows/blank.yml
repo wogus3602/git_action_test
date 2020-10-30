@@ -1,33 +1,22 @@
 name: Swift
 on:
-      push:
-            branches: dd
       pull_request:
-            branches: dd
-jobs: 
-      build-and-test:
-        runs-on: [macos-latest] 
-        env: 
-          XC_VERSION: ${{ '12.1.0' }}
-          XC_PROJECT: ${{ 'GitAction/GitAction.xcworkspace' }}
-          XC_SCHEME: ${{ 'GitAction' }} 
-          GITHUB_TOKEN: ${{ 'secrets.GITHUB_TOKEN' }}
-    
-        steps:  
-
-        - name: Write a comment when unit test fails
-          uses: actions/github-script@v3
-          with:
-                github-token: $GITHUB_TOKEN
-                script: |
-                    const ref = “${{github.ref}}”
-                    const pull_number = Number(ref.split(“/”)[2])
-                    
-                    await await github.issues.createComment({
-                      issue_number: pull_number,
-                      owner: context.repo.owner,
-                      repo: context.repo.repo,
-                      body: '👋 Thanks for reporting!'
-                    })
-
-          if: ${{ failure() }}   
+            branches: main
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+              const ref = "${{github.ref}}"
+              const pull_number = Number(ref.split("/")[2])
+              
+              console.log(context)
+              await await github.issues.createComment({
+                issue_number: pull_number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: '👋 Thanks for reporting!'
+              })
