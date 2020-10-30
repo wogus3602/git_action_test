@@ -27,7 +27,7 @@ jobs:
           run: /usr/bin/xcodebuild test -workspace "$XC_PROJECT" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11'
         
         - name: Write a comment when unit test fails
-        - uses: actions/github-script@v3
+          uses: actions/github-script@v3
           with:
             github-token: ${{secrets.GITHUB_TOKEN}}
             script: |
@@ -41,4 +41,4 @@ jobs:
                 body: ‘:wave: Thanks for reporting!’
               })
               
-          if: ${{ failure() }}  
+          if: ${{ failure() }}   
