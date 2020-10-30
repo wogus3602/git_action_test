@@ -1,0 +1,8 @@
+enhancement :
+  - 'GitAction/*'
+
+bug :
+  - 'GitAction/'
+  
+invalid :
+  - 'GitAction/**'
