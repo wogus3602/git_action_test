@@ -12,6 +12,12 @@ jobs:
           XC_SCHEME: ${{ 'GitAction' }}
 
     steps:
+      - uses: actions/checkout@v2
+      - name: Install Dependencies
+        working-directory: ./GitAction
+        run: pod install --repo-update
+        shell: bash
+          
       - uses: actions/github-script@v3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
