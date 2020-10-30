@@ -1,7 +1,7 @@
 name: Swift
 on:
-      push:
-        branches: [main]
+      pull_request:
+            branches: dd
 jobs:
   comment:
     runs-on: ubuntu-latest
@@ -10,9 +10,12 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
+              const ref = "${{github.ref}}"
+              const pull_number = Number(ref.split("/")[2])
+              
               console.log(context)
               await await github.issues.createComment({
-                issue_number: 32,
+                issue_number: pull_number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 body: '👋 Thanks for reporting!'
