@@ -12,7 +12,8 @@ jobs:
           XC_SCHEME: ${{ 'GitAction' }}
 
     steps:  
+      - uses: actions/checkout@v2
       - name: Write a comment when unit test fails
-        run: echo github
+        run: echo ${{ github }}
               
         
