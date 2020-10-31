@@ -1,44 +1,104 @@
 name: Swift
 on:
-      push:
-            branches: dd
       pull_request:
-            branches: dd
-jobs: 
-      build:
-        runs-on: [macos-latest] 
-        env: 
+            branches: main
+jobs:
+  build-and-UnitTest:
+    runs-on: macos-latest
+          
+    env:
           XC_VERSION: ${{ '12.1.0' }}
           XC_PROJECT: ${{ 'GitAction/GitAction.xcworkspace' }}
-          XC_SCHEME: ${{ 'GitAction' }} 
+          XC_SCHEME: ${{ 'GitAction' }}
 
-        steps:  
-        - uses: actions/checkout@v2
-          
-        - name: Install Dependencies
-          working-directory: ./GitAction
-          run: pod install --repo-update
-          shell: bash
-          
-        - name: Select latest Xcode 
-          run: "sudo xcode-select -s /Applications/Xcode_$XC_VERSION.app"  
-          
-        - name: Run Unit and UI Tests
-          run: /usr/bin/xcodebuild test -workspace "$XC_PROJECT" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11'
-        
-        - name: Write a comment when unit test fails
-          uses: actions/github-script@v3
-          with:
-            github-token: ${{secrets.GITHUB_TOKEN}}
-            script: |
-              const ref = “${{github.ref}}”
-              const pull_number = Number(ref.split(“/”)[2])
-              
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Dependencies
+        working-directory: ./GitAction
+        run: pod install --repo-update
+        shell: bash
+    
+      - name: Select latest Xcode
+        run: "sudo xcode-select -s /Applications/Xcode_$XC_VERSION.app"
+
+      - name: Run Unit and UI Tests
+        run: /usr/bin/xcodebuild test -workspace "$XC_PROJECT" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11'
+      
+      - name: Slack Fail Message
+        if: failure()
+        uses: tokorom/action-slack-incoming-webhook@v1.1.3
+        env:
+          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          text: Unit test failure.
+          attachments: |
+            [
+              {
+                "color": "danger",
+                "author_name": "${{ github.actor }}",
+                "author_icon": "${{ github.event.sender.avatar_url }}",
+                "fields": [
+                  {
+                    "title": "Author",
+                    "value": "${{ github.actor }}"
+                  },
+                  {
+                    "title": "Event Name",
+                    "value": "${{ github.repository.url }}"
+                  },
+                  {
+                    "title": "GitHub Actions URL",
+                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
+                  },
+                  {
+                    "title": "Event Path",
+                    "value": "${{ github.event_path }}
+                  }    
+                ]
+              }
+            ]  
+
+      - name: Slack Success Message
+        if: success()
+        uses: tokorom/action-slack-incoming-webhook@v1.1.3
+        env:
+          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          text: Unit test Success.
+          attachments: |
+            [
+              {
+                "color": "good",
+                "author_name": "${{ github.actor }}",
+                "author_icon": "${{ github.event.sender.avatar_url }}",
+                "fields": [
+                  {
+                    "title": "Commit Message",
+                    "value": "${{ env.COMMIT_MESSAGE }}"
+                  },
+                  {
+                    "title": "GitHub Actions URL",
+                    "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
+                  }
+                ]
+              }
+            ]
+            
+      - name: Write a comment when unit test fails
+        uses: actions/github-script@v3
+        if: failure()
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+              const ref = "${{github.ref}}"
+              const pull_number = Number(ref.split("/")[2])
+            
+              console.log(context)
               await await github.issues.createComment({
                 issue_number: pull_number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: ‘:wave: Thanks for reporting!’
+                body: '👋 Thanks for reporting!'
               })
               
-          if: ${{ failure() }}   
+        
