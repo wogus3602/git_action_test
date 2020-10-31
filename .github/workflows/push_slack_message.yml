@@ -24,7 +24,7 @@ jobs:
                 "author_icon": "${{ github.event.sender.avatar_url }}",
                 "fields": [
                   {
-                    "title": "github.event_pathL",
+                    "title": "github.event_path1",
                     "value": "${{ github.ref }}"
                   },
                   {
