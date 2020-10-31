@@ -5,11 +5,7 @@ jobs:
     name: Notify Slack
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Notify Slack
-      uses: drilonrecica/action-slack-notify@0.0.3
-      env:
-        SLACK_TITLE: Post Title
-        SLACK_USERNAME: Wogus3602
-        SLACK_MESSAGE: 'Post Content :rocket:'
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+    - uses: someimportantcompany/github-actions-slack-message@v1
+      with:
+        webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+        text: Test
