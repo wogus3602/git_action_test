@@ -1,10 +1,8 @@
 name: Auto Unit Test and Fail Comment
 
 on:
-  push:
-    branches: [ main, dd ]
   pull_request:
-    branches: [ main, dd ]
+    branches: [ dd ]
   
 jobs:
   build-and-UnitTest:
