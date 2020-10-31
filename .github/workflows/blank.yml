@@ -39,16 +39,16 @@ jobs:
                 "author_icon": "${{ github.event.sender.avatar_url }}",
                 "fields": [
                   {
-                    "title": "Commit Message",
-                    "value": "${{ env.COMMIT_MESSAGE }}"
+                    "title": "Author",
+                    "value": "${{ github.actor }}"
+                  },
+                  {
+                    "title": "Event Name",
+                    "value": "${{ github.event_name }}"
                   },
                   {
                     "title": "GitHub Actions URL",
                     "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
-                  },
-                  {
-                    "title": "Compare URL",
-                    "value": "${{ github.event.compare }}"
                   }
                 ]
               }
@@ -75,10 +75,6 @@ jobs:
                   {
                     "title": "GitHub Actions URL",
                     "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
-                  },
-                  {
-                    "title": "Compare URL",
-                    "value": "${{ github.event.compare }}"
                   }
                 ]
               }
