@@ -12,10 +12,28 @@ jobs:
           XC_SCHEME: ${{ 'GitAction' }}
 
     steps:  
-      - name: Slack Success Message
-        run: |
-          echo ${{ github.event.repository.pulls_url }}
-          echo ${{ github.run_number }}
-          echo ${{ github.event_path }}
-          echo ${{ github.base_ref }}
-          echo ${{ github.repository }}
+    - name: Slack Success Message
+      if: success()
+      uses: tokorom/action-slack-incoming-webhook@v1.1.3
+      env:
+        INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      with:
+        text: Unit test Success.
+        attachments: |
+          [
+            {
+              "color": "good",
+              "author_name": "${{ github.actor }}",
+              "author_icon": "${{ github.event.sender.avatar_url }}",
+              "fields": [
+                {
+                  "title": "Commit Message",
+                  "value": "${{ env.COMMIT_MESSAGE }}"
+                },
+                {
+                  "title": "GitHub Actions URL",
+                  "value": "${{ github.event.repository.url }}/pulls/${{ github.run_number }}"
+                }
+              ]
+            }
+          ]
