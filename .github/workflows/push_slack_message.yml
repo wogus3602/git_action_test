@@ -9,4 +9,7 @@ jobs:
     - name: Notify Slack
       uses: drilonrecica/action-slack-notify@0.0.3
       env:
+        SLACK_TITLE: Post Title
+        SLACK_USERNAME: Wogus3602
+        SLACK_MESSAGE: 'Post Content :rocket:'
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
