@@ -55,7 +55,7 @@ jobs:
                 "fields": [
                   {
                     "title": "github.event_pathL",
-                    "value": "${{ github.event_path }}"
+                    "value": "${{ github.base_ref }}"
                   }
                 ]
               }
