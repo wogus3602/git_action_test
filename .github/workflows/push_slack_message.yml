@@ -8,6 +8,13 @@ jobs:
   slackNotification:
     name: Notify Slack
     runs-on: ubuntu-latest
+    
+    env:
+          XC_VERSION: ${{ '12.1.0' }}
+          XC_PROJECT: ${{ 'GitAction/GitAction.xcworkspace' }}
+          XC_SCHEME: ${{ 'GitActionTest' }}
+          VERSION: $(echo $GITHUB_REF | cut -d / -f 3)
+   
     steps:
       - name: Get the version
         id: get_version
