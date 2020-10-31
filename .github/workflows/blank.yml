@@ -17,3 +17,5 @@ jobs:
           echo ${{ github.event.repository.pulls_url }}
           echo ${{ github.run_number }}
           echo ${{ github.event_path }}
+          echo ${{ github.base_ref }}
+          echo ${{ github.repository }}
