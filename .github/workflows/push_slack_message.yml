@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Get the version
-        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+        run: echo "VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
         
       - name: Slack Success Message
         if: success()
@@ -34,7 +34,7 @@ jobs:
                 "fields": [
                   {
                     "title": "github.event_path1",
-                    "value": "${{ env.RELEASE_VERSION }}"
+                    "value": "${{ env.VERSION }}"
                   },
                   {
                     "title": "github.event_path2",
