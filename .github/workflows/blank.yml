@@ -18,7 +18,7 @@ jobs:
     steps:       
       - name: Get the version
         run: |
-          number = echo $GITHUB_REF | cut -d / -f 3
+          number = 'echo $GITHUB_REF | cut -d / -f 3'
           echo "ISSUE_NUMBER=$number" >> $GITHUB_ENV
 
       - uses: actions/checkout@v2
