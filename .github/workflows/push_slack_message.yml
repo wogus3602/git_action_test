@@ -13,11 +13,11 @@ jobs:
           XC_VERSION: ${{ '12.1.0' }}
           XC_PROJECT: ${{ 'GitAction/GitAction.xcworkspace' }}
           XC_SCHEME: ${{ 'GitActionTest' }}
-   
+
     steps:
       - name: Get the version
         id: get_version
-        run: echo "$VERSION='$GITHUB_REF' | cut -d / -f 3" >> $GITHUB_ENV
+        run: echo "$VERSION=$GITHUB_REF | cut -d / -f 3" >> $GITHUB_ENV
         
       - name: Slack Success Message
         if: success()
