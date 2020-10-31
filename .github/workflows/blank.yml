@@ -44,7 +44,7 @@ jobs:
                   },
                   {
                     "title": "Event Name",
-                    "value": "${{ GITHUB_BASE_REF }}"
+                    "value": "${{ github.head_ref }}"
                   },
                   {
                     "title": "GitHub Actions URL",
