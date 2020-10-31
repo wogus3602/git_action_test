@@ -52,7 +52,7 @@ jobs:
                   },
                   {
                     "title": "Event Path",
-                    "value": "${{ github.event_path }}
+                    "value": "${{ github.event_path }}"
                   }    
                 ]
               }
