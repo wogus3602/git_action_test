@@ -82,7 +82,7 @@ jobs:
                   },
                   {
                     "title": "GitHub Pull Request URL",
-                    "value": "${{ github.event.repository.html_url }}/pull/${{  env.ISSUE_NUMBER  }}"
+                    "value": "${{ github.event.repository.html_url }}/pull/${{  $ISSUE_NUMBER  }}"
                   }
                 ]
               }
