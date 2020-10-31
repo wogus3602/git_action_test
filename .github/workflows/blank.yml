@@ -26,7 +26,8 @@ jobs:
          /usr/bin/xcodebuild test -workspace "$XC_PROJECT" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11'
 
       - name: Get the version
-        run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
+        id: get_version
+        run: echo ::set-env name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
         
       - name: Slack Success Message
         if: success()
