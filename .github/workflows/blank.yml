@@ -14,7 +14,7 @@ jobs:
     steps:  
       - name: Write a comment when unit test fails
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.TOKEN }}
           script: |
               const ref = "${{github}}"
               console.log(ref)
