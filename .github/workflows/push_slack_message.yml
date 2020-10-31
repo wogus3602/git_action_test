@@ -12,4 +12,4 @@ jobs:
         SLACK_TITLE: Post Title
         SLACK_USERNAME: Wogus3602
         SLACK_MESSAGE: 'Post Content :rocket:'
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
