@@ -14,6 +14,8 @@ jobs:
     steps:  
       - uses: actions/checkout@v2
       - name: Write a comment when unit test fails
-        run: echo ${{ github.event.repository.html_url }}
+        run: |
+              echo ${{ github.event.repository.pulls_url }}
+              echo ${{github.run_number}}
               
         
