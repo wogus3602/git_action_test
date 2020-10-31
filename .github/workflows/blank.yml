@@ -15,7 +15,13 @@ jobs:
       XC_PROJECT: ${{ 'GitAction/GitAction.xcworkspace' }}
       XC_SCHEME: ${{ 'GitActionTest' }}
     
-    steps:
+    steps:       
+      - name: Get the version
+        run: echo "ISSUE_NUMBER=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+  
+      - name: Get the version
+        run: echo "ISSUE_NUMBER2=${GITHUB_REF}" >> $GITHUB_ENV
+
       - uses: actions/checkout@v2
       - name: Install Dependencies
         working-directory: ./iOS/IssueTracker
@@ -27,12 +33,6 @@ jobs:
 
       - name: Run Unit and UI Tests
         run: /usr/bin/xcodebuild test -workspace "$XC_PROJECT" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11'
-     
-      - name: Get the version
-        run: echo "ISSUE_NUMBER=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-  
-      - name: Get the version
-        run: echo "ISSUE_NUMBER2=${GITHUB_REF}" >> $GITHUB_ENV
 
       # Unit Test 성공했을 때 Slack에 Success Message 보냄
       - name: Slack Success Message
