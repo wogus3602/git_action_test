@@ -21,7 +21,7 @@ jobs:
           echo "ISSUE_NUMBER=$number" >> $GITHUB_ENV
   
       - name: Get the version
-        run: echo "ISSUE_NUMBER2=${GITHUB_REF}" >> $GITHUB_ENV
+        run: echo "ISSUE_NUMBER3=${GITHUB_REF}" >> $GITHUB_ENV
         
         
           
@@ -46,7 +46,7 @@ jobs:
                   },
                   {
                     "title": "github.event_path2",
-                    "value": "${{ env.ISSUE_NUMBER2 }}"
+                    "value": "${{ env.ISSUE_NUMBER3 }}"
                   }
                 ]
               }
