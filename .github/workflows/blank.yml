@@ -16,17 +16,17 @@ jobs:
       XC_SCHEME: ${{ 'GitActionTest' }}
     
     steps:       
-      - name: Get the version
-        run:
-          number=`echo $GITHUB_REF | cut -d / -f 3` 
-          echo "ISSUE_NUMBER=$number" >> $GITHUB_ENV
-
       - uses: actions/checkout@v2
       - name: Install Dependencies
         working-directory: ./iOS/IssueTracker
         run: pod install --repo-update
         shell: bash
 
+      - name: Get the version
+        run:
+          number=`echo $GITHUB_REF | cut -d / -f 3` 
+          echo "ISSUE_NUMBER=$number" >> $GITHUB_ENV
+          
       - name: Select latest Xcode
         run: "sudo xcode-select -s /Applications/Xcode_$XC_VERSION.app"
 
