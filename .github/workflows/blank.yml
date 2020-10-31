@@ -2,9 +2,9 @@ name: Auto Unit Test and Fail Comment
 
 on:
   push:
-    branches: [ ios_develop, actions_test ]
+    branches: [ main, dd ]
   pull_request:
-    branches: [ ios_release, actions_test ]
+    branches: [ main, dd ]
   
 jobs:
   build-and-UnitTest:
