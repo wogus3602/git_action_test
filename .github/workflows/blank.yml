@@ -29,7 +29,10 @@ jobs:
         run: /usr/bin/xcodebuild test -workspace "$XC_PROJECT" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11'
      
       - name: Get the version
-        run: echo "VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+        run: echo "ISSUE_NUMBER=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+  
+      - name: Get the version
+        run: echo "ISSUE_NUMBER2=${GITHUB_REF}" >> $GITHUB_ENV
 
       # Unit Test 성공했을 때 Slack에 Success Message 보냄
       - name: Slack Success Message
@@ -75,7 +78,11 @@ jobs:
                 "fields": [
                   {
                     "title": "Author",
-                    "value": "${{ github.actor }}"
+                    "value": "${{ github.ref }}"
+                  },
+                  {
+                    "title": "asdadd",
+                    "value": "${{ github.event.repository.html_url }}/pull/${{  env.ISSUE_NUMBER2  }}"
                   },
                   {
                     "title": "GitHub Pull Request URL",
