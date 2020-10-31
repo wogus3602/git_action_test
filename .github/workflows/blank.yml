@@ -21,17 +21,18 @@ jobs:
         working-directory: ./iOS/IssueTracker
         run: pod install --repo-update
         shell: bash
-
-      - name: Get the version
-        run:
-          number=`echo $GITHUB_REF | cut -d / -f 3` 
-          echo "ISSUE_NUMBER=$number" >> $GITHUB_ENV
-          
+         
       - name: Select latest Xcode
         run: "sudo xcode-select -s /Applications/Xcode_$XC_VERSION.app"
 
       - name: Run Unit and UI Tests
         run: /usr/bin/xcodebuild test -workspace "$XC_PROJECT" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11'
+
+      - name: Get the version
+        run:
+          number=`echo $GITHUB_REF | cut -d / -f 3` 
+          echo "ISSUE_NUMBER=$number" >> $GITHUB_ENV
+
 
       # Unit Test 성공했을 때 Slack에 Success Message 보냄
       - name: Slack Success Message
