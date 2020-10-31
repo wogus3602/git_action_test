@@ -29,7 +29,7 @@ jobs:
                   },
                   {
                     "title": "github.event_path2",
-                    "value": "${GITHUB_REF#refs/tags/}"
+                    "value": "${{GITHUB_REF#refs/tags/}}"
                   }
                 ]
               }
