@@ -12,6 +12,10 @@ jobs:
           XC_SCHEME: ${{ 'GitAction' }}
 
     steps:
+      - name: Get the version
+        id: get_version
+        run: echo ::set-env name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
+        
       - uses: actions/checkout@v2
       - name: Install Dependencies
         working-directory: ./GitAction
@@ -25,10 +29,6 @@ jobs:
         run: |
          /usr/bin/xcodebuild test -workspace "$XC_PROJECT" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11'
 
-      - name: Get the version
-        id: get_version
-        run: echo ::set-env name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
-        
       - name: Slack Success Message
         if: success()
         uses: tokorom/action-slack-incoming-webhook@v1.1.3
