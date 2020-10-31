@@ -49,7 +49,7 @@ jobs:
                   },
                   {
                     "title": "GitHub Pull Request URL",
-                    "value": "${{ github.event.repository.html_url }}/pulls/${{ env.VERSION }}"
+                    "value": "${{ github.event.repository.html_url }}/pull/${{ env.VERSION }}"
                   }
                 ]
               }
@@ -75,7 +75,7 @@ jobs:
                   },
                   {
                     "title": "GitHub Pull Request URL",
-                    "value": "${{ github.event.repository.html_url }}/pulls/${{  env.VERSION  }}"
+                    "value": "${{ github.event.repository.html_url }}/pull/${{  env.VERSION  }}"
                   }
                 ]
               }
