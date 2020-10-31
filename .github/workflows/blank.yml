@@ -16,3 +16,4 @@ jobs:
         run: |
           echo ${{ github.event.repository.pulls_url }}
           echo ${{ github.run_number }}
+          echo ${{ github.event_path }}
