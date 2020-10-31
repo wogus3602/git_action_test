@@ -14,7 +14,7 @@ jobs:
       XC_VERSION: ${{ '12.1.0' }}
       XC_PROJECT: ${{ 'GitAction/GitAction.xcworkspace' }}
       XC_SCHEME: ${{ 'GitActionTest' }}
-      ISSUE_NUBMER: ${{ `echo $GITHUB_REF | cut -d / -f 3` }}
+      ISSUE_NUBMER: ${{ 'echo $GITHUB_REF | cut -d / -f 3' }}
       
     steps:       
       - uses: actions/checkout@v2
