@@ -30,11 +30,11 @@ jobs:
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         with:
-          text: Successfully automated deployment.
+          text: Unit test failure.
           attachments: |
             [
               {
-                "color": "good",
+                "color": "danger",
                 "author_name": "${{ github.actor }}",
                 "author_icon": "${{ github.event.sender.avatar_url }}",
                 "fields": [
@@ -60,7 +60,7 @@ jobs:
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         with:
-          text: Successfully automated deployment.
+          text: Unit test Success.
           attachments: |
             [
               {
