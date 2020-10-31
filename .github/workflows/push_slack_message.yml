@@ -25,11 +25,11 @@ jobs:
                 "fields": [
                   {
                     "title": "github.event_path1",
-                    "value": "${{ github.ref }}"
+                    "value": "${{ github.ref.refs.tags }}"
                   },
                   {
                     "title": "github.event_path2",
-                    "value": "${GITHUB_REF/refs\/tags\//}"
+                    "value": "${{ github.ref.tags }}"
                   }
                 ]
               }
