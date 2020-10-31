@@ -12,6 +12,10 @@ jobs:
           XC_SCHEME: ${{ 'GitAction' }}
 
     steps:
+      - name: Get the version
+        id: get_version
+        run: echo ::set-env name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
+        
       - uses: actions/checkout@v2
       - name: Install Dependencies
         working-directory: ./GitAction
@@ -45,7 +49,7 @@ jobs:
                   },
                   {
                     "title": "GitHub Pull Request URL",
-                    "value": "${{ github.event.repository.url }}/pulls/${{ github.run_number }}"
+                    "value": "${{ github.event.repository.html_url }}/pull/${{ env.VERSION }}"
                   }
                 ]
               }
@@ -71,7 +75,7 @@ jobs:
                   },
                   {
                     "title": "GitHub Pull Request URL",
-                    "value": "${{ github.event.repository.url }}/pulls/${{ github.run_number }}"
+                    "value": "${{ github.event.repository.html_url }}/pull/${{  env.VERSION  }}"
                   }
                 ]
               }
