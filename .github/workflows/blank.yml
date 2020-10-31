@@ -44,7 +44,7 @@ jobs:
                   },
                   {
                     "title": "Event Name",
-                    "value": "${{ github.repository.url }}"
+                    "value": "${{ github.pull_request.pull_request.url }}"
                   },
                   {
                     "title": "GitHub Actions URL",
@@ -52,7 +52,7 @@ jobs:
                   },
                   {
                     "title": "Event Path",
-                    "value": "${{ github.event_path }}
+                    "value": "${{ github.event_path }}"
                   }    
                 ]
               }
