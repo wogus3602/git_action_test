@@ -29,8 +29,7 @@ jobs:
         run: /usr/bin/xcodebuild test -workspace "$XC_PROJECT" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11'
      
       - name: Get the version
-        id: get_version
-        run: $(echo $GITHUB_REF | cut -d / -f 3) >> $ISSUE_NUMBER
+        run: echo "VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
       # Unit Test 성공했을 때 Slack에 Success Message 보냄
       - name: Slack Success Message
