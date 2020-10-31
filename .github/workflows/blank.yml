@@ -9,7 +9,7 @@ jobs:
     env:
           XC_VERSION: ${{ '12.1.0' }}
           XC_PROJECT: ${{ 'GitAction/GitAction.xcworkspace' }}
-          XC_SCHEME: ${{ 'GitAction' }}
+          XC_SCHEME: ${{ 'GitActionTest' }}
 
     steps:
       - name: Get the version
