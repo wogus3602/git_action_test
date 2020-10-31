@@ -1,24 +1,24 @@
-name: Swift
+name: Auto Unit Test and Fail Comment
+
 on:
-      pull_request:
-            branches: main
+  push:
+    branches: [ main, dd ]
+  pull_request:
+    branches: [ main, dd ]
+  
 jobs:
   build-and-UnitTest:
     runs-on: macos-latest
 
     env:
-          XC_VERSION: ${{ '12.1.0' }}
-          XC_PROJECT: ${{ 'GitAction/GitAction.xcworkspace' }}
-          XC_SCHEME: ${{ 'GitAction' }}
-
+      XC_VERSION: ${{ '12.1.0' }}
+      XC_PROJECT: ${{ 'GitAction/GitAction.xcworkspace' }}
+      XC_SCHEME: ${{ 'GitActionTest' }}
+    
     steps:
-      - name: Get the version
-        id: get_version
-        run: echo ::set-env name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
-        
       - uses: actions/checkout@v2
       - name: Install Dependencies
-        working-directory: ./GitAction
+        working-directory: ./iOS/IssueTracker
         run: pod install --repo-update
         shell: bash
 
@@ -26,16 +26,19 @@ jobs:
         run: "sudo xcode-select -s /Applications/Xcode_$XC_VERSION.app"
 
       - name: Run Unit and UI Tests
-        run: |
-         /usr/bin/xcodebuild test -workspace "$XC_PROJECT" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11'
+        run: /usr/bin/xcodebuild test -workspace "$XC_PROJECT" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11'
+     
+      - name: Get the version
+        run: echo "VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
+      # Unit Test 성공했을 때 Slack에 Success Message 보냄
       - name: Slack Success Message
         if: success()
         uses: tokorom/action-slack-incoming-webhook@v1.1.3
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         with:
-          text: 🎉Unit test Success🎉.
+          text: 🎉Unit Test Success🎉.
           attachments: |
             [
               {
@@ -49,19 +52,20 @@ jobs:
                   },
                   {
                     "title": "GitHub Pull Request URL",
-                    "value": "${{ github.event.repository.html_url }}/pull/${{ env.VERSION }}"
+                    "value": "${{ github.event.repository.html_url }}/pull/${{ env.ISSUE_NUMBER }}"
                   }
                 ]
               }
             ]
-
+              
+      # Unit Test 실패했을 때 Slack에 Fail Message 보냄
       - name: Slack Fail Message
         if: failure()
         uses: tokorom/action-slack-incoming-webhook@v1.1.3
         env:
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         with:
-          text: 🚨Unit test failure🚨.
+          text: 🚨Unit Test Failure🚨.
           attachments: |
             [
               {
@@ -75,12 +79,13 @@ jobs:
                   },
                   {
                     "title": "GitHub Pull Request URL",
-                    "value": "${{ github.event.repository.html_url }}/pull/${{  env.VERSION  }}"
+                    "value": "${{ github.event.repository.html_url }}/pull/${{  env.ISSUE_NUMBER  }}"
                   }
                 ]
               }
             ]
 
+      # Unit Test 실패했을 때 PR에 Fail Message 생성
       - name: Write a comment when unit test fails
         uses: actions/github-script@v3
         if: failure()
@@ -90,10 +95,9 @@ jobs:
               const ref = "${{github.ref}}"
               const pull_number = Number(ref.split("/")[2])
 
-              console.log(context)
-              await await github.issues.createComment({
+              await github.issues.createComment({
                 issue_number: pull_number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: '👋 Thanks for reporting!'
+                body: 'Test Code Fail👋 '
               })
