@@ -18,7 +18,7 @@ jobs:
       - name: Get the version
         run: |
           number='echo $GITHUB_REF | cut -d / -f 3'
-          echo "ISSUE_NUMBER=$number" >> $GITHUB_ENV
+          echo "ISSUE_NUMBER='$number'" >> $GITHUB_ENV
   
       - name: Get the version
         run: echo "ISSUE_NUMBER2=${GITHUB_REF}" >> $GITHUB_ENV
