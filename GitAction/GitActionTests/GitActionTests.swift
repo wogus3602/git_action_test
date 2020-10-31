@@ -18,7 +18,7 @@ class GitActionTests: XCTestCase {
 
     func testExample() throws {
         XCTAssertTrue(true)
-        //XCTAssertTrue(false)dasdas
+        //XCTAssertTrue(false)dasdaskk
     }
 
     func testPerformanceExample() throws {
