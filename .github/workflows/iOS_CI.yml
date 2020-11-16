@@ -26,4 +26,4 @@ jobs:
         run: "sudo xcode-select -s /Applications/Xcode_$XC_VERSION.app"
 
       - name: Run Build and Unit Tests
-        run: /usr/bin/xcodebuild test -workspace "$XC_WORKSPACE" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11'
+        run: /usr/bin/xcodebuild test -workspace "$XC_WORKSPACE" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 12'
