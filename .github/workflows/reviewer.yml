@@ -1,13 +1,14 @@
-name: "Auto lottery"
+name: "Auto Reviewer"
 on:
   pull_request:
-    types: [opened, ready_for_review, reopened]
+    types: [opened, ready_for_review]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - uses: uesteibar/reviewer-lottery@v1
+    - uses: actions/checkout@v1.1.0
+    - name: Auto Reviewer
+      uses: uesteibar/reviewer-lottery@v1.1.0
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
