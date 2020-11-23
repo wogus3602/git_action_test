@@ -1,5 +1,9 @@
 groups:
-  - name: devs # name of the group
-    reviewers: 1 # how many reviewers do you want to assign?
-    usernames: # github usernames of the reviewers
+  - name: devs
+    reviewers: 5
+    usernames: 
+      - chojl1125
+      - kati-kms
+      - KYHyeon
+      - SeokBA
       - wogus3602
